@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void connectionLost(Throwable throwable) {
-
+                Log.w("Debug","connectionLost");
             }
 
             @Override
-            public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+            public void messageArrived(String topic, MqttMessage mqttMessage) {
                 Log.w("Debug",mqttMessage.toString());
                 dataReceived.setText(mqttMessage.toString());
                 mChart.addEntry(Float.valueOf(mqttMessage.toString()));

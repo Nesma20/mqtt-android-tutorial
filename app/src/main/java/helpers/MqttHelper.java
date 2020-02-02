@@ -20,13 +20,10 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class MqttHelper {
     public MqttAndroidClient mqttAndroidClient;
 
-    final String serverUri = "tcp://broker.hivemq.com:1883";
+    final String serverUri = "tcp://196.202.24.127:1883";
 
-    final String clientId = "ExampleAndroidClient";
-    final String subscriptionTopic = "sensor/+";
-
-    final String username = "xxxxxxx";
-    final String password = "yyyyyyy";
+    final String clientId = "1";
+    final String subscriptionTopic = "1";
 
     public MqttHelper(Context context){
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
@@ -38,6 +35,7 @@ public class MqttHelper {
 
             @Override
             public void connectionLost(Throwable throwable) {
+                Log.w("Mqtt", "connectionLost");
 
             }
 
@@ -48,6 +46,11 @@ public class MqttHelper {
 
             @Override
             public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+                try {
+                    Log.w("Mqtt", iMqttDeliveryToken.getMessage().toString());
+                } catch (MqttException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
